@@ -1,4 +1,4 @@
-const countOccurrences = (str: string) =>
+const countOccurrencesFunctional = (str: string) =>
     Object.entries<number>(
         str
             .replace(/[\n\r]+/g, ' ')
@@ -6,11 +6,12 @@ const countOccurrences = (str: string) =>
             .replace(/\s\s+/g, ' ')
             .split(' ')
             .reduce((obj: any, word: string) => {
-                if (word in obj) obj[word] += 1; else obj[word] = 1;
+                const wordLowerCase = word.toLowerCase();
+                if (wordLowerCase in obj) obj[wordLowerCase] += 1; else obj[wordLowerCase] = 1;
                 return obj;
             }, {})
     )
         .sort((a, b) => b[1] - a[1])
         .map(x => ({word: x[0], count: x[1]}));
 
-export default countOccurrences;
+export default countOccurrencesFunctional;
