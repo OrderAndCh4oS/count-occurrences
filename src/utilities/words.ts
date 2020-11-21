@@ -1,8 +1,8 @@
-import SortDirection from "../enums/sort-direction";
-import IOccurrences from "../interfaces/occurrences.interface";
 import IWords from "../interfaces/words.interface";
+import IOccurrences from "../interfaces/occurrences.interface";
+import SortDirection from "../enums/sort-direction";
 
-class Words implements IWords {
+export default class Words implements IWords {
     private _words: { [word: string]: { countIndex: number, alphaIndex: number } } = {};
     private _countOrder: IOccurrences[] = [];
     private _alphaOrder: IOccurrences[] = [];
@@ -115,22 +115,3 @@ class Words implements IWords {
         this._alphaOrder[this._words[word].alphaIndex].count -= 1;
     }
 }
-
-const countOccurrencesFast = (str: string) => {
-    const words: IWords = new Words();
-    let word = '';
-    for (const char of str) {
-        if (char.match(/[\p{L}\p{M}-]+/u)) {
-            word += char;
-            continue;
-        }
-        if (word) words.addWord(word.toLowerCase());
-        word = '';
-    }
-
-    if (word) words.addWord(word.toLowerCase());
-
-    return words;
-};
-
-export default countOccurrencesFast;

@@ -1,15 +1,15 @@
 import SortDirection from "../enums/sort-direction";
 import IOccurrences from "../interfaces/occurrences.interface";
-import IWords from "../interfaces/words.interface";
 
 class PriorityQueue {
     private _sortOn: string;
-    private _priorityQueue: any[] = [null]
     private _n = 0
 
     constructor(sortOn: string) {
         this._sortOn = sortOn;
     }
+
+    private _priorityQueue: any[] = [null]
 
     get priorityQueue(): any[] {
         return this._priorityQueue;
@@ -128,7 +128,7 @@ class Words {
                 break;
             case SortDirection.DESC:
                 const size = this._countOrder.size();
-                for(i = 0; i < size; i++) {
+                for (i = 0; i < size; i++) {
                     yield this._countOrder.popMax()
                 }
                 break;
@@ -142,7 +142,7 @@ class Words {
                 break;
             case SortDirection.DESC:
                 const size = this._countOrder.size();
-                for(i = 0; i < size; i++) yield this._alphaOrder.popMax()
+                for (i = 0; i < size; i++) yield this._alphaOrder.popMax()
                 break;
         }
     }

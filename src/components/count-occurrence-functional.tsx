@@ -8,13 +8,27 @@ const CountOccurrenceFunctional: FC = () => {
     const [text, setText] = useState<string>('');
     const [occurrences, setOccurrences] = useState<IOccurrences[] | null>(null);
     const [sortColumns, setSortColumns] = useState<ISortColumns<IOccurrences> | null>(null)
+    const [processingTime, setProcessingTime] = useState<number>(0);
+    const [sortingTime, setSortingTime] = useState<number>(0);
+
+    const performSort = (prevState: IOccurrences[], name: "word" | "count", isAsc: boolean) => {
+        const start = new Date();
+        const sorted = [...prevState.sort(sortOnColumn<IOccurrences>(name, isAsc))];
+        const end = new Date();
+        setSortingTime(end.getTime() - start.getTime());
+        return sorted;
+    };
 
     useEffect(() => {
         if (!text) {
             setOccurrences(null);
             return
         }
-        setOccurrences(countOccurrencesFunctional(text));
+        const start = new Date();
+        const newOccurrences = countOccurrencesFunctional(text);
+        const end = new Date();
+        setProcessingTime(end.getTime() - start.getTime());
+        setOccurrences(newOccurrences);
     }, [text]);
 
     useEffect(() => {
@@ -34,7 +48,7 @@ const CountOccurrenceFunctional: FC = () => {
     }
 
     const sortBy = (name: keyof IOccurrences, isAsc: boolean) => {
-        setOccurrences(prevState => prevState ? [...prevState.sort(sortOnColumn<IOccurrences>(name, isAsc))] : null);
+        setOccurrences(prevState => prevState ? performSort(prevState, name, isAsc) : null);
     }
 
     const handleTextChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -47,6 +61,8 @@ const CountOccurrenceFunctional: FC = () => {
                 <label htmlFor='text' className={styles.label}>Count Word Occurrences</label>
                 <textarea id='text' value={text} onChange={handleTextChange} className={styles.textarea}/>
             </div>
+            <p>Processing Time: {processingTime}</p>
+            <p>Sorting Time: {sortingTime}</p>
             {occurrences && sortColumns && <table>
                 <thead>
                 <tr>
