@@ -3,7 +3,8 @@ import loremIpsum from "./text/lorem-ipsum";
 import davidCopperfield from "./text/david-copperfield";
 
 describe('countOccurrencesFunctional', () => {
-    const data = countOccurrencesFunctional('blah, Blah, blah one two three four, One Two')
+    const data = countOccurrencesFunctional('blah, Blah, blah one two three four, One Two');
+
     describe('Order', () => {
         test('countOrder', () => {
             expect(data).toEqual([{count: 3, word: "blah"}, {count: 2, word: "one"}, {count: 2, word: "two"}, {
@@ -18,6 +19,7 @@ describe('countOccurrencesFunctional', () => {
             }, {count: 2, word: "one"}, {count: 1, word: "three"}, {count: 2, word: "two"}])
         });
     });
+
     describe('Lorem Ipsum', () => {
         const data = countOccurrencesFunctional(loremIpsum);
         test('countOrder', () => {
