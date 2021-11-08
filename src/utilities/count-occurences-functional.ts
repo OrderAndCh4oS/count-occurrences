@@ -7,7 +7,8 @@ const countOccurrencesFunctional = (str: string) =>
             .split(/\s+/)
             .reduce((obj: any, word: string) => {
                 const wordLowerCase = word.toLowerCase();
-                if (wordLowerCase && wordLowerCase in obj) obj[wordLowerCase] += 1; else obj[wordLowerCase] = 1;
+                if (wordLowerCase && wordLowerCase in obj) obj[wordLowerCase] += 1;
+                else obj[wordLowerCase] = 1;
                 return obj;
             }, {})
     )

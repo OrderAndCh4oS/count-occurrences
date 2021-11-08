@@ -1,11 +1,11 @@
-import countOccurrencesSortAsAdded from "../utilities/count-occurrences-sort-as-added";
+import countOccurrencesPriorityQueue from "../utilities/count-occurrences-priority-queue";
 import SortDirection from "../enums/sort-direction";
 import loremIpsum from "./text/lorem-ipsum";
 import davidCopperfield from "./text/david-copperfield";
 
 describe('countOccurrencesFast', () => {
 
-    const data = countOccurrencesSortAsAdded('blah, Blah, blah one two three four, One Two')
+    const data = countOccurrencesPriorityQueue('blah, Blah, blah one two three four, One Two')
 
     describe('Order', () => {
         test('countOrder', () => {
@@ -54,7 +54,7 @@ describe('countOccurrencesFast', () => {
 
     describe('Remove Words', () => {
         test('Remove blah', () => {
-            const data = countOccurrencesSortAsAdded('blah, blah, blah one two three four, one two')
+            const data = countOccurrencesPriorityQueue('blah, blah, blah one two three four, one two')
 
             data.removeWord('blah');
             expect(data.countOrder).toEqual([{count: 2, word: "blah"}, {count: 2, word: "two"}, {
@@ -67,7 +67,7 @@ describe('countOccurrencesFast', () => {
             }, {count: 1, word: "three"}, {count: 2, word: "two"}])
         });
         test('Remove three', () => {
-            const data = countOccurrencesSortAsAdded('blah, blah, blah one two three four, one two')
+            const data = countOccurrencesPriorityQueue('blah, blah, blah one two three four, one two')
 
             data.removeWord('three');
             expect(data.countOrder).toEqual([{count: 3, word: "blah"}, {count: 2, word: "two"}, {
@@ -80,7 +80,7 @@ describe('countOccurrencesFast', () => {
             }, {count: 2, word: "two"}])
         });
         test('Remove various', () => {
-            const data = countOccurrencesSortAsAdded('blah, blah, blah one two three four, one two')
+            const data = countOccurrencesPriorityQueue('blah, blah, blah one two three four, one two')
 
             data.removeWord('blah');
             data.removeWord('three');
@@ -100,7 +100,7 @@ describe('countOccurrencesFast', () => {
     });
 
     describe('Lorem Ipsum', () => {
-        const data = countOccurrencesSortAsAdded(loremIpsum);
+        const data = countOccurrencesPriorityQueue(loremIpsum);
         test('countOrder', () => {
             let lastCount = Infinity;
             for (const countOrder of data.countOrder) {
@@ -116,7 +116,7 @@ describe('countOccurrencesFast', () => {
     });
 
     describe('David Copperfield', () => {
-        const data = countOccurrencesSortAsAdded(davidCopperfield);
+        const data = countOccurrencesPriorityQueue(davidCopperfield);
         test('countOrder', () => {
             let lastCount = Infinity;
             for (const countOrder of data.countOrder) {

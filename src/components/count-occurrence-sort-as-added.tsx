@@ -1,7 +1,7 @@
 import React, {ChangeEvent, FC, useEffect, useState} from 'react';
 import styles from '../styles.module.css';
 import IWords from "../interfaces/words.interface";
-import countOccurrencesSortAsAdded from "../utilities/count-occurrences-sort-as-added";
+import countOccurrencesPriorityQueue from "../utilities/count-occurrences-priority-queue";
 import SortDirection from "../enums/sort-direction";
 import IOccurrences from "../interfaces/occurrences.interface";
 import SortOn from "../enums/sort-on";
@@ -20,7 +20,7 @@ const CountOccurrenceSortAsAdded: FC = () => {
             return;
         }
         const start = new Date();
-        const newWords = countOccurrencesSortAsAdded(text);
+        const newWords = countOccurrencesPriorityQueue(text);
         const end = new Date();
         setProcessingTime(end.getTime() - start.getTime());
         setWords(newWords);

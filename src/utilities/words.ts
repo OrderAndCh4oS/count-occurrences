@@ -84,7 +84,7 @@ export default class Words implements IWords {
     private swimAlpha(word: string) {
         let i = this._words[word].alphaIndex;
         let j = i - 1;
-        while (j >= 0 && this._alphaOrder[j].word.localeCompare(this._alphaOrder[i].word) > 0) {
+        while (j >= 0 && this._alphaOrder[j].word.localeCompare(this._alphaOrder[i].word) < 0) {
             this._words[word].alphaIndex = j;
             this._words[this._alphaOrder[j].word].alphaIndex = i;
             [this._alphaOrder[j], this._alphaOrder[i]] = [this._alphaOrder[i], this._alphaOrder[j]];
